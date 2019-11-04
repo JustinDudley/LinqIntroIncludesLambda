@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 
-
+// new comment
 namespace LINQIntroIncludesLambdaConsole {
 
     // NEW CLASS (created for FIRST example)
@@ -52,25 +52,56 @@ namespace LINQIntroIncludesLambdaConsole {
             foreach (var i in ascInts) {                 // NOW the query gets executed. Defining a query doesn't execute it. Execution is delayed until something in the code references it. 
                 Console.Write($"{i} ");                 // "interpolated string"
             }
+            Console.WriteLine();
 
             // IF WANT AVERAGE:  CAN'T DO WITH QUERY SYNTAX, NEED METHOD SYNTAX
             //  => "the fat arrow"   'such that'  // lambda (fred => fred.Firstname == "Greg"  sim. to foreach(var fred in ints), also see H-W notes 
 
+
             var avg = ascInts.Average(i => i); // this line is the method syntax.  And /(or?) Lambda syntax.  COULD do the above 4 lines in method syntax.  "Chaining them together".  Query syntax not good for aggreagate functions  // not going to exclude any.   i=> i  get ALL in the collection  //WEIRD SYNTAX.  LAMBDA SYNTAX.  (comes from functional programming)
+            var simpAvg = ascInts.Average();  //same thing, just eliminating the i => i part.  It's ... implied?
             Console.WriteLine($"\nAverage of odds LT 7 is {avg}");
-        }
-    }
-}
+            Console.WriteLine($"\nAverage of odds LT 7 is {simpAvg}");
+
+            var evenInts = ints.Sum(i => i);
+            Console.Write(evenInts);
+
+            // int[] ints = { 2, 4, 6, 8, 7, 5, 3, 1 }; 
+            //.Where, .Sum, .Average, .Min, .Max, .Contains, .All, .First, .Join, .OrderBy, .ToList
+
+            var thing1 = ints.Where(i => i % 3 == 1);
+            var thing2 = ints.Sum(i => i + 3);
+            var thing3 = ints.Average(i => i);
+            var thing4 = ints.Min(i => i + 10);
+            var thing5 = ints.Max(i => i / 2);
+            var thing6 = ints.Contains(4);
+            var thing7 = ints.All(i => i % 1 == 0);
+            var thing8 = ints.First(i => i == 6);
+            var thing9 = ints.OrderBy(i => i);
+            var thing10 = ints.ToList();
+
+            Console.WriteLine(thing1);
+            Console.WriteLine(thing2);
+            Console.WriteLine(thing3);
+            Console.WriteLine(thing4);
+            Console.WriteLine(thing5);
+            Console.WriteLine(thing6);
+            Console.WriteLine(thing7);
+            Console.WriteLine(thing8);
+            Console.WriteLine(thing9);
+            Console.WriteLine(thing10);
 
             // NOTES:
 
             //In LINQ,  Eexist 2 syntaxes you can use
             //  - Query syntax (recommended)
-            //  - Method syntax (for the few things you can't do with Query syntax.  Method syntax is more cryptic.  Greg likes Method syntax)
+            //  - Method syntax (for the few things you can't do with Query syntax.  Method syntax is
+            //    more cryptic.  Greg likes Method syntax)
 
 
-            // we'll be working mostly with class intances, not just lists of numbers. . instance.subcolumn, most of the time.  Not just sorting integers.
-            // query syntax more readable, but doesn't do everything you need
+            // we'll be working mostly with class intances, not just lists of numbers. . instance.subcolumn, most of the 
+            // time.  Not just sorting integers.
+            // query syntax more readable, but doesn't do everything you need. Doesn't handle aggregate functions
 
 
             // also can be used in generic collections (List<>, etc.)
@@ -80,10 +111,15 @@ namespace LINQIntroIncludesLambdaConsole {
 
 
             //LINQ SYNTAX great to subset the data.
-            //in users, we have no wayto   search the data.  "Bring me back all the admins".  THEN go through a foreach loop, get all the admins
+            //in users, we have no wayto   search the data.  "Bring me back all the admins".  THEN go through a foreach 
+            // loop, get all the admins
             //with linq syntax, you get the admins right away.  With just a couple of lines of code.  
 
 
             //(this is an inline query"  -what does that mean?
             //Query syntax:  Query the array. output the results
 
+
+        }
+    }
+}
